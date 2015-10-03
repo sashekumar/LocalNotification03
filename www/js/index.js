@@ -46,8 +46,8 @@ var app = {
 
         console.log('Received Event: ' + id);
         
-        window.plugin.notification.local.getScheduledIds( function (scheduledIds) {
-            alert('Scheduled IDs: ' + scheduledIds.join(' ,'));
-        });
+        //window.plugin.notification.local.getScheduledIds( function (scheduledIds) {
+        //    alert('Scheduled IDs: ' + scheduledIds.join(' ,'));
+        //});
     }
 };
