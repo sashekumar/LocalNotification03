@@ -16,7 +16,7 @@
         <script src="lib/onsen/js/angular/angular.js"></script>
         <script src="lib/onsen/js/onsenui.js"></script>
         <script>
-          ons.bootstrap();
+          //ons.bootstrap();
           
             function addReminder() {
                 window.plugin.notification.local.add({ message: 'Payment for October Due!',sound: "android.resource://" + package_name + "/res/audio/beep-09.mp3",badge:1 });
@@ -209,9 +209,9 @@
                 <input type="text" class="text-input--underbar" ng-model="login.mcode" placeholder="Member Code" value="">
                 <input type="password" class="text-input--underbar" ng-model="login.password" placeholder="Password" value="">
                 <br><br>
-                <ons-button modifier="large" class="login-button" ng-click="login.pay();addReminder()">Log In</ons-button>
+                <ons-button modifier="large" class="login-button" ng-click="login.pay();">Log In</ons-button>
                 <br>
-                <ons-button modifier="large" class="login-button" ng-click="addReminder()">Add Notification</ons-button>
+                <ons-button modifier="large" class="login-button" ng-click="addReminder();">Add Notification</ons-button>
                 <br>
         </ons-col>
       </ons-row>
