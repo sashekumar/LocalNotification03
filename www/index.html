@@ -34,12 +34,10 @@
         <script src="lib/onsen/js/onsenui.js"></script>
         <script>
           ons.bootstrap();
-          ons.ready(function() {
-            // Add another Onsen UI element
-            var content = document.getElementById("my-content");
-            content.innerHTML="<ons-button>Login</ons-button>";
-            ons.compile(content);
-          });
+          
+            function addReminder() {
+                window.plugin.notification.local.add({ message: 'Payment for October Due!' });
+            }
         </script>
     </head>
     <body>
@@ -51,6 +49,12 @@
             </div>
             
         </div>
+        <ons-navigator title="Navigator" var="myNavigator">
+    <ons-page>
+      <ons-button onclick="addReminder();">Login</ons-button>
+      <div id="my-content"></div>
+    </ons-page>
+  </ons-navigator>
         <div class="my-content"></div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
