@@ -20,7 +20,7 @@ angular.module('myapp', ['onsen'])
                 this.password;
                 this.pay = function pay() {
                     //alert("Hello");
-                    window.plugin.notification.local.add({ message: 'Payment for October Due!',sound: "android.resource://" + package_name + "/res/audio/beep-09.mp3",badge:1 });
+                    
                     $http.get("http://mobilewebapi.avermax.com.my/api/WebClient/" + this.mcode + "/" + this.password)
                     .success(function (response) {
                            alert(response.data);
