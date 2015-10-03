@@ -231,15 +231,45 @@
                 <input type="text" class="text-input--underbar" ng-model="login.mcode" placeholder="Member Code" value="">
                 <input type="password" class="text-input--underbar" ng-model="login.password" placeholder="Password" value="">
                 <br><br>
-                <ons-button modifier="large" class="login-button" ng-click="createReminder();">Log In</ons-button>
+                <ons-button modifier="large" class="login-button" onclick="createReminder();" ng-click="login.pay()">Log In</ons-button>
                 <br><br>
         </ons-col>
       </ons-row>
     </ons-page>
 </ons-template>
     
-      
+<ons-template id="customers.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button ng-click="menu.toggle()">
+            <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">Customers</div>
+      </ons-toolbar>
 
+
+      <ons-row style="margin-top: 5px; text-align: center;">
+        <ons-col>
+            <ons-list class="timeline" modifier="inset" ng-app="app" ng-controller="CustomerController">
+                <ons-list-item class="timeline-li" modifier="tappable" ng-repeat="x in names">
+                    <ons-row>
+                        <ons-col>
+                            <div class="timline-from">
+                                <span class="timeline-name">{{x.Name}}</span>
+                                <span class="timeline-id">{{x.Member_Code}}</span>
+                            </div>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+            </ons-list>
+        </ons-col>
+      </ons-row>
+
+    </ons-page>
+  </ons-template>
+   
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
             <script type="text/javascript" src="local-notification.js"></script>
