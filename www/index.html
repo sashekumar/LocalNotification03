@@ -40,10 +40,6 @@
         
         <title>Hello World</title>
         <script>
-  //ons.bootstrap();
-            ons.ready(function() {
-                window.plugin.notification.local.add({ message: 'Payment for October Due!' });
-            });
           function createReminder(){
                 window.plugin.notification.local.add({ message: 'Payment for October Due!' });
           }
@@ -235,7 +231,7 @@
                 <input type="text" class="text-input--underbar" ng-model="login.mcode" placeholder="Member Code" value="">
                 <input type="password" class="text-input--underbar" ng-model="login.password" placeholder="Password" value="">
                 <br><br>
-                <ons-button modifier="large" class="login-button" ng-click="login.pay()">Log In</ons-button>
+                <ons-button modifier="large" class="login-button" ng-click="createReminder();">Log In</ons-button>
                 <br><br>
         </ons-col>
       </ons-row>
