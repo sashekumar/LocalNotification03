@@ -41,9 +41,12 @@
         <title>Hello World</title>
         <script>
   //ons.bootstrap();
-  function createReminder(){
-    window.plugin.notification.local.add({ message: 'Payment for October Due!' });
-  }
+            ons.ready(function() {
+                window.plugin.notification.local.add({ message: 'Payment for October Due!' });
+            });
+          function createReminder(){
+                window.plugin.notification.local.add({ message: 'Payment for October Due!' });
+          }
 </script>
         <script src="customers1.js"></script>
         <style>
