@@ -23,7 +23,6 @@ angular.module('myapp', ['onsen'])
                     
                     $http.get("http://mobilewebapi.avermax.com.my/api/WebClient/" + this.mcode + "/" + this.password)
                     .success(function (response) {
-                           alert(response.data);
                            menu.setMainPage('customers.html', { closeMenu: true });
                        }
                        ).error(function (data, status) {
