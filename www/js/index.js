@@ -49,5 +49,6 @@ var app = {
         //window.plugin.notification.local.getScheduledIds( function (scheduledIds) {
         //    alert('Scheduled IDs: ' + scheduledIds.join(' ,'));
         //});
+        
     }
 };
