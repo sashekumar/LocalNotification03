@@ -24,8 +24,8 @@ angular.module('myapp', ['onsen'])
                     $http.get("http://mobilewebapi.avermax.com.my/api/WebClient/" + this.mcode + "/" + this.password)
                     //$http.get("http://localhost:47503/api/WebClient/" + this.mcode + "/" + this.password)
                     .success(function (response) {
-                           alert(response.status) 
-                           //menu.setMainPage('customers.html', { closeMenu: true });
+                           //alert(response.status) 
+                           menu.setMainPage('customers.html', { closeMenu: true });
                        }
                        ).error(function (data, status) {
                            window.localStorage.removeItem("memberCode");
