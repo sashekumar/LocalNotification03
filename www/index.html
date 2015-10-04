@@ -473,8 +473,7 @@
         </ons-row>
         
       <ons-row style="margin-top: 5px; text-align: center;">
-        <ons-button modifier="large" class="login-button" ng-click="menu.setMainPage('mystatement.html', {closeMenu: true})">Go to My Statements</ons-button>
-                <br><br>
+        <ons-button ng-click="menu.setMainPage('mystatement.html', {closeMenu: true})" modifier="large--quiet">Go to My Statements</ons-button>
         </ons-row>
 
     </ons-page>
@@ -598,9 +597,8 @@
             </ons-list>
             </ons-col>
         </ons-row>
-        <ons-row style="margin-top: 5px; text-align: center;">
-        <ons-button modifier="large" class="login-button" ng-click="menu.setMainPage('mystatement.html', {closeMenu: true})">Back</ons-button>
-                <br><br>
+        <ons-row style="margin-top: 5px; text-align: center;width:98%;display: inline-block;">
+        <ons-button ng-click="menu.setMainPage('mystatement.html', {closeMenu: true})" modifier="large--quiet">Back to My Statements</ons-button>
         </ons-row>
     </ons-page>
   </ons-template>
