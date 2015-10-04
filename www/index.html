@@ -186,28 +186,14 @@
       <ons-list class="menu-list">
         <ons-list-item class="menu-item" ng-click="menu.setMainPage('customers.html', {closeMenu: true})">
           <ons-icon icon="fa-bookmark" fixed-width="true"></ons-icon>
-          Customers
-        </ons-list-item>
-
-        <ons-list-item class="menu-item" ng-click="menu.setMainPage('agents.html', {closeMenu: true})">
-          <ons-icon icon="fa-bookmark" fixed-width="true"></ons-icon>
-          Agents
-        </ons-list-item>
-
-        <ons-list-item class="menu-item" ng-click="menu.setMainPage('agentcustomers.html', {closeMenu: true})">
-          <ons-icon icon="fa-bookmark" fixed-width="true"></ons-icon>
-          Agent's Customers
+          Service Report
         </ons-list-item>
       </ons-list>
 
       <br>
 
       <ons-list class="bottom-menu-list">
-        <ons-list-item class="bottom-menu-item" ng-click="menu.setMainPage('help.html', {closeMenu: true})">
-          Help
-        </ons-list-item>
-
-        <ons-list-item class="bottom-menu-item" ng-click="menu.setMainPage('login.html', {closeMenu: true})">
+      <ons-list-item class="bottom-menu-item" ng-click="menu.setMainPage('login.html', {closeMenu: true})">
           Logout
         </ons-list-item>
       </ons-list>
@@ -233,7 +219,7 @@
                 <br><br>
                 <ons-button modifier="large" class="login-button" onclick="createReminder();" ng-click="login.pay()">Log In</ons-button>
                 <br><br>
-        </ons-col>
+</ons-col>
       </ons-row>
     </ons-page>
 </ons-template>
@@ -246,10 +232,136 @@
             <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
           </ons-toolbar-button>
         </div>
-        <div class="center">Customers</div>
+        <div class="center">Service Report</div>
       </ons-toolbar>
 
-
+        <ons-row style="margin-top: 5px; text-align: center;">
+        <ons-col>
+            <ons-list class="timeline" modifier="inset">
+                <ons-list-item class="timeline-li" modifier="tappable">
+                    <ons-row>
+                        <ons-col>
+                            <div class="timline-from">
+                                <span class="timeline-name">Aug-2015 To May-2016</span>
+                            </div>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+            </ons-list>
+            </ons-col>
+        </ons-row>
+        
+    
+      <ons-row style="margin-top: 5px; text-align: center;">
+        <ons-col>
+            <ons-list class="timeline" modifier="inset">
+                <ons-list-item class="timeline-li" modifier="tappable">
+                    <ons-row>
+                        <ons-col>
+                            <div class="timline-from">
+                                <span class="timeline-name">Name</span>
+                                <span class="timeline-id">Tow Ket Yaw</span>
+                            </div>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+                <ons-list-item class="timeline-li" modifier="tappable">
+                    <ons-row>
+                        <ons-col>
+                            <div class="timline-from">
+                                <span class="timeline-name">Code</span>
+                                <span class="timeline-id">750205065143001</span>
+                            </div>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+                <ons-list-item class="timeline-li" modifier="tappable">
+                <ons-row>
+                        <ons-col>
+                            <div class="timline-from">
+                                <span class="timeline-name">Financial Institution</span>
+                                <span class="timeline-id">HLBB</span>
+                            </div>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+                
+                <ons-list-item class="timeline-li" modifier="tappable">
+                <ons-row>
+                        <ons-col>
+                            <div class="timline-from">
+                                <span class="timeline-name"> Interest Rate (BLR 6.85% - 2%)</span>
+                                <span class="timeline-id">4.85</span>
+                            </div>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+                
+                <ons-list-item class="timeline-li" modifier="tappable">
+                <ons-row>
+                        <ons-col>
+                             <div class="timline-from">
+                                <span class="timeline-name">Outstanding Loan Balance</span>
+                                <span class="timeline-id">$215,528.26</span>
+                            </div>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+                    
+                <ons-list-item class="timeline-li" modifier="tappable">
+                <ons-row>
+                        <ons-col>
+                            <div class="timline-from">
+                                <span class="timeline-name">Interest Amount</span>
+                                <span class="timeline-id">$148,436.40</span>
+                            </div>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+                <ons-list-item class="timeline-li" modifier="tappable">
+                <ons-row>
+                        <ons-col>
+                             <div class="timline-from">
+                                <span class="timeline-name">Tenure (month)</span>
+                                <span class="timeline-id">360</span>
+                            </div>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+                <ons-list-item class="timeline-li" modifier="tappable">
+                <ons-row>
+                        <ons-col>
+                            <div class="timline-from">
+                                <span class="timeline-name">Tenure Paid (month)</span>
+                                <span class="timeline-id">74</span>
+                            </div>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+                <ons-list-item class="timeline-li" modifier="tappable">
+                <ons-row>
+                        <ons-col>
+                            <div class="timline-from">
+                                <span class="timeline-name">Tenure Balance (month)</span>
+                                <span class="timeline-id">286</span>
+                            </div>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+                <ons-list-item class="timeline-li" modifier="tappable">
+                <ons-row>
+                        <ons-col>
+                            <div class="timline-from">
+                                <span class="timeline-name">Old Monthly Payment </span>
+                                <span class="timeline-id">$1256 ($1,272.60)</span>
+                            </div>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+            </ons-list>
+        </ons-col>
+      </ons-row>
+        
       <ons-row style="margin-top: 5px; text-align: center;">
         <ons-col>
             <ons-list class="timeline" modifier="inset" ng-app="app" ng-controller="CustomerController">
@@ -258,7 +370,7 @@
                         <ons-col>
                             <div class="timline-from">
                                 <span class="timeline-name">{{x.Name}}</span>
-                                <span class="timeline-id">{{x.Member_Code}}</span>
+                                <span class="timeline-id">{{x.Member_Code}}, {{x.Start_Date | date:"dd-MMM-yyyy"}}</span>
                             </div>
                         </ons-col>
                     </ons-row>
