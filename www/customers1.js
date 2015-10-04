@@ -3,9 +3,9 @@ angular.module('myapp', ['onsen'])
             .controller('CustomerController', function ($scope, $http) {
                
                 var memberCode = window.localStorage.getItem("memberCode");
-                memberCode = '790523085533';
+                //memberCode = '790523085533';
                 if (memberCode != undefined) {
-                    $http.get("http://mobilewebapi.avermax.com.my/api/WebClient/")
+                    $http.get("http://mobilewebapi.avermax.com.my/api/WebClient/" + memberCode)
                     .success(function (response) { $scope.names = response; });
                 }
                 else {
@@ -20,10 +20,12 @@ angular.module('myapp', ['onsen'])
                 this.password;
                 this.pay = function pay() {
                     //alert("Hello");
-                    
+                    window.localStorage.setItem("memberCode", this.mcode);
                     $http.get("http://mobilewebapi.avermax.com.my/api/WebClient/" + this.mcode + "/" + this.password)
+                    //$http.get("http://localhost:47503/api/WebClient/" + this.mcode + "/" + this.password)
                     .success(function (response) {
-                           menu.setMainPage('customers.html', { closeMenu: true });
+                           alert(response.status) 
+                           //menu.setMainPage('customers.html', { closeMenu: true });
                        }
                        ).error(function (data, status) {
                            window.localStorage.removeItem("memberCode");
