@@ -1,12 +1,38 @@
+
 angular.module('myapp', ['onsen'])
 
-            .controller('CustomerController', function ($scope, $http) {
+            //shared services
+            .service('sharedProperties', function () {
+                    var monthsValue = 0;
+
+                    return {
+                        getProperty: function () {
+                            return monthsValue;
+                        },
+                        setProperty: function(value) {
+                            monthsValue = value;
+                        }
+                    }})
+
+/////////////////////////////////////////////////////////////////////////////////
+            .controller('CustomerController', function ($scope, $http, sharedProperties) {
                
                 var memberCode = window.localStorage.getItem("memberCode");
                 //memberCode = '790523085533';
                 if (memberCode != undefined) {
-                    $http.get("http://mobilewebapi.avermax.com.my/api/WebClient/" + memberCode)
-                    .success(function (response) { $scope.names = response; });
+                    //$http.get("http://mobilewebapi.avermax.com.my/api/WebClient/" + memberCode)
+                    //$http.get("http://mobilewebapi.avermax.com.my/api/WebAgent")
+                    $http.get("http://localhost:47503/api/WebClientStatementList/" + memberCode)
+                    .success(function (response) { $scope.names = response; });       
+                    
+                     $scope.customNavigate=function(msg){
+                    //$location.path("/view2"+msg)
+                            //alert(msg);
+                            //$scope.Data = Data;
+                            sharedProperties.setProperty(msg);
+                            menu.setMainPage('myreminders.html', { closeMenu: true });
+                    }
+                    
                 }
                 else {
                     menu.setMainPage('login.html', { closeMenu: true });
@@ -14,6 +40,39 @@ angular.module('myapp', ['onsen'])
                  
             })
 
+/////////////////////////////////////////////////////////////////////////////////
+                .controller('ClientServiceReport', function ($scope, $http) {
+               
+                var memberCode = window.localStorage.getItem("memberCode");
+                //memberCode = '790523085533';
+                if (memberCode != undefined) {
+                    $http.get("http://localhost:47503/api/WebClientServiceReport/" + memberCode)
+                    .success(function (response) { $scope.names = response; }); 
+                }
+                else {
+                    menu.setMainPage('login.html', { closeMenu: true });
+                }
+                 
+            })
+
+/////////////////////////////////////////////////////////////////////////////////
+            .controller('StatementController', function ($scope, $http, sharedProperties) {
+               
+               //alert(sharedProperties.getProperty());
+                var memberCode = window.localStorage.getItem("memberCode");
+                if (memberCode != undefined) {
+                    //$http.get("http://mobilewebapi.avermax.com.my/api/WebClient/" + memberCode)
+                    $http.get("http://localhost:47503/api/WebAgent/GetByMonth/" + memberCode + "/" + sharedProperties.getProperty())
+                    
+                    .success(function (response) { $scope.names = response; });       
+                }
+                else {
+                    menu.setMainPage('login.html', { closeMenu: true });
+                }
+                 
+            })
+
+/////////////////////////////////////////////////////////////////////////////////
             .controller('LoginController', function ($scope, $http) {
                 window.localStorage.removeItem("memberCode");
                 this.mcode;
@@ -35,27 +94,4 @@ angular.module('myapp', ['onsen'])
                 };
             })
 
-         //.controller('InvoiceController2', function () {
-         //    this.qty = 1;
-         //    this.cost = 2;
-         //    this.inCurr = 'EUR';
-         //    this.currencies = ['USD', 'EUR', 'CNY'];
-         //    this.usdToForeignRates = {
-         //        USD: 1,
-         //        EUR: 0.74,
-         //        CNY: 6.09
-         //    };
-
-         //    this.total = function total(outCurr) {
-         //        return this.convertCurrency(this.qty * this.cost, this.inCurr, outCurr);
-         //    };
-         //    this.convertCurrency = function convertCurrency(amount, inCurr, outCurr) {
-         //        return amount * this.usdToForeignRates[outCurr] / this.usdToForeignRates[inCurr];
-         //    };
-         //    this.pay = function pay() {
-         //        window.alert("Quantity = " + this.qty);
-         //    };
-         //})
-
-;
-;
+;;

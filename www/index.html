@@ -244,15 +244,16 @@
         </div>
         <div class="center">My Service Report</div>
       </ons-toolbar>
-
+<div id="holder" ng-app="app" ng-controller="ClientServiceReport">
+    <div id="dataHolder" ng-repeat="x in names">
         <ons-row style="margin-top: 5px; text-align: center;">
         <ons-col>
             <ons-list class="timeline" modifier="inset">
-                <ons-list-item class="timeline-li" modifier="tappable">
+                <ons-list-item class="timeline-li">
                     <ons-row>
                         <ons-col>
                             <div class="timline-from">
-                                <span class="timeline-name">Aug-2015 To May-2016</span>
+                                <span class="timeline-name">{{x.period}}</span>
                             </div>
                         </ons-col>
                     </ons-row>
@@ -265,7 +266,7 @@
       <ons-row style="margin-top: 5px; text-align: center;">
         <ons-col>
             <ons-list class="timeline" modifier="inset">
-                <ons-list-item class="timeline-li" modifier="tappable">
+                <ons-list-item class="timeline-li">
                     <ons-row>
                         <ons-col>
                             <div class="timline-from">
@@ -274,12 +275,12 @@
                         </ons-col>
                         <ons-col>
                             <div class="timline-from">
-                                <span class="timeline-id">Tow Ket Yaw</span>
+                                <span class="timeline-id">{{x.name}}</span>
                             </div>
                         </ons-col>
                     </ons-row>
                 </ons-list-item>
-                <ons-list-item class="timeline-li" modifier="tappable">
+                <ons-list-item class="timeline-li">
                     <ons-row>
                         <ons-col>
                             <div class="timline-from">
@@ -288,12 +289,12 @@
                         </ons-col>
                         <ons-col>
                             <div class="timline-from">
-                                <span class="timeline-id">750205065143001</span>
+                                <span class="timeline-id">{{x.memberCode}}</span>
                             </div>
                         </ons-col>
                     </ons-row>
                 </ons-list-item>
-                <ons-list-item class="timeline-li" modifier="tappable">
+                <ons-list-item class="timeline-li">
                     <ons-row>
                         <ons-col>
                             <div class="timline-from">
@@ -302,12 +303,12 @@
                         </ons-col>
                         <ons-col>
                             <div class="timline-from">
-                                <span class="timeline-id">HLBB</span>
+                                <span class="timeline-id">{{x.finInst}}</span>
                             </div>
                         </ons-col>
                     </ons-row>
                 </ons-list-item>
-                <ons-list-item class="timeline-li" modifier="tappable">
+                <ons-list-item class="timeline-li">
                     <ons-row>
                         <ons-col>
                             <div class="timline-from">
@@ -316,12 +317,12 @@
                         </ons-col>
                         <ons-col>
                             <div class="timline-from">
-                                <span class="timeline-id">4.85</span>
+                                <span class="timeline-id">{{x.Interest_Rate}}</span>
                             </div>
                         </ons-col>
                     </ons-row>
                 </ons-list-item>
-                <ons-list-item class="timeline-li" modifier="tappable">
+                <ons-list-item class="timeline-li">
                     <ons-row>
                         <ons-col>
                             <div class="timline-from">
@@ -330,12 +331,12 @@
                         </ons-col>
                         <ons-col>
                             <div class="timline-from">
-                                <span class="timeline-id">$215,528.26</span>
+                                <span class="timeline-id">{{x.Outstanding_Loan_Bal}}</span>
                             </div>
                         </ons-col>
                     </ons-row>
                 </ons-list-item>
-                <ons-list-item class="timeline-li" modifier="tappable">
+                <ons-list-item class="timeline-li">
                     <ons-row>
                         <ons-col>
                             <div class="timline-from">
@@ -344,12 +345,12 @@
                         </ons-col>
                         <ons-col>
                             <div class="timline-from">
-                                <span class="timeline-id">$148,436.40</span>
+                                <span class="timeline-id">{{x.Interest_Amt}}</span>
                             </div>
                         </ons-col>
                     </ons-row>
                 </ons-list-item>
-                <ons-list-item class="timeline-li" modifier="tappable">
+                <ons-list-item class="timeline-li">
                     <ons-row>
                         <ons-col>
                             <div class="timline-from">
@@ -358,12 +359,12 @@
                         </ons-col>
                         <ons-col>
                             <div class="timline-from">
-                                <span class="timeline-id">360</span>
+                                <span class="timeline-id">{{x.Tenure}}</span>
                             </div>
                         </ons-col>
                     </ons-row>
                 </ons-list-item>
-                <ons-list-item class="timeline-li" modifier="tappable">
+                <ons-list-item class="timeline-li">
                     <ons-row>
                         <ons-col>
                             <div class="timline-from">
@@ -372,12 +373,12 @@
                         </ons-col>
                         <ons-col>
                             <div class="timline-from">
-                                <span class="timeline-id">74</span>
+                                <span class="timeline-id">{{x.Tenure_Paid}}</span>
                             </div>
                         </ons-col>
                     </ons-row>
                 </ons-list-item>
-                <ons-list-item class="timeline-li" modifier="tappable">
+                <ons-list-item class="timeline-li">
                     <ons-row>
                         <ons-col>
                             <div class="timline-from">
@@ -386,12 +387,12 @@
                         </ons-col>
                         <ons-col>
                             <div class="timline-from">
-                                <span class="timeline-id">286</span>
+                                <span class="timeline-id">{{x.Tenure_Bal}}</span>
                             </div>
                         </ons-col>
                     </ons-row>
                 </ons-list-item>
-                <ons-list-item class="timeline-li" modifier="tappable">
+                <ons-list-item class="timeline-li">
                     <ons-row>
                         <ons-col>
                             <div class="timline-from">
@@ -400,7 +401,7 @@
                         </ons-col>
                         <ons-col>
                             <div class="timline-from">
-                                <span class="timeline-id">$1256 ($1,272.60)</span>
+                                <span class="timeline-id">{{x.Old_Monthly_Pay}}</span>
                             </div>
                         </ons-col>
                     </ons-row>
@@ -412,7 +413,7 @@
         <ons-row style="margin-top: 5px; text-align: center;">
         <ons-col>
             <ons-list class="timeline" modifier="inset">
-                <ons-list-item class="timeline-li" modifier="tappable">
+                <ons-list-item class="timeline-li">
                     <ons-row>
                         <ons-col>
                             <div class="timline-from">
@@ -421,12 +422,12 @@
                         </ons-col>
                         <ons-col>
                             <div class="timline-from">
-                                <span class="timeline-id">Save50</span>
+                                <span class="timeline-id">{{x.Service_Plan_Name}}</span>
                             </div>
                         </ons-col>
                     </ons-row>
                 </ons-list-item>
-                <ons-list-item class="timeline-li" modifier="tappable">
+                <ons-list-item class="timeline-li">
                     <ons-row>
                         <ons-col>
                             <div class="timline-from">
@@ -435,7 +436,7 @@
                         </ons-col>
                         <ons-col>
                             <div class="timline-from">
-                                <span class="timeline-id">$75,339.48</span>
+                                <span class="timeline-id">{{x.Est_Interest_Sav}}</span>
                             </div>
                         </ons-col>
                     </ons-row>
@@ -449,12 +450,12 @@
                         </ons-col>
                         <ons-col>
                             <div class="timline-from">
-                                <span class="timeline-id">143</span>
+                                <span class="timeline-id">{{x.Est_Tenure}}</span>
                             </div>
                         </ons-col>
                     </ons-row>
                 </ons-list-item>
-                <ons-list-item class="timeline-li" modifier="tappable">
+                <ons-list-item class="timeline-li">
                     <ons-row>
                         <ons-col>
                             <div class="timline-from">
@@ -463,7 +464,7 @@
                         </ons-col>
                         <ons-col>
                             <div class="timline-from">
-                                <span class="timeline-id">$10,213.39</span>
+                                <span class="timeline-id">{{x.Yr_Principal_Reduced}}</span>
                             </div>
                         </ons-col>
                     </ons-row>
@@ -472,6 +473,8 @@
             </ons-col>
         </ons-row>
         
+  </div>  
+</div>    
       <ons-row style="margin-top: 5px; text-align: center;">
         <ons-button ng-click="menu.setMainPage('mystatement.html', {closeMenu: true})" modifier="large--quiet">Go to My Statements</ons-button>
         </ons-row>
@@ -494,11 +497,11 @@
         <ons-col>
             <ons-list class="timeline" modifier="inset" ng-app="app" ng-controller="CustomerController">
                 <ons-list-item class="timeline-li" modifier="tappable" ng-repeat="x in names">
-                    <ons-row ng-click="menu.setMainPage('myreminders.html', {param1: x.Member_Code}, { closeMenu: true });">
+                    <ons-row ng-click="customNavigate(x.month);">
                         <ons-col>
                             <div class="timline-from">
-                                <span class="timeline-name">{{x.Name}}</span>
-                                <span class="timeline-id">{{x.Member_Code}}, {{x.Start_Date | date:"dd-MMM-yyyy"}}</span>
+                                <span class="timeline-name"> {{x.paymentDate | date:"MMM-yyyy"}}</span>
+                                <span class="timeline-id">{{x.beginningBalance}}</span>
                             </div>
                         </ons-col>
                     </ons-row>
@@ -521,10 +524,10 @@
         <div class="center">My Statement Details</div>
       </ons-toolbar>
 
-        <ons-row style="margin-top: 5px; text-align: center;">
+        <ons-row style="margin-top: 5px; text-align: center;" ng-app="app" ng-controller="StatementController">
         <ons-col>
-            <ons-list class="timeline" modifier="inset">
-                <ons-list-item class="timeline-li" modifier="tappable">
+            <ons-list class="timeline" modifier="inset" ng-repeat="x in names">
+                <ons-list-item class="timeline-li">
                     <ons-row>
                         <ons-col>
                             <div class="timline-from">
@@ -533,12 +536,12 @@
                         </ons-col>
                         <ons-col>
                             <div class="timline-from">
-                                <span class="timeline-id">1</span>
+                                <span class="timeline-id">{{x.paymentDate | date:"MMM-yyyy"}}</span>
                             </div>
                         </ons-col>
                     </ons-row>
                 </ons-list-item>
-                <ons-list-item class="timeline-li" modifier="tappable">
+                <ons-list-item class="timeline-li">
                     <ons-row>
                         <ons-col>
                             <div class="timline-from">
@@ -547,12 +550,12 @@
                         </ons-col>
                         <ons-col>
                             <div class="timline-from">
-                                <span class="timeline-id">1-Aug-2015</span>
+                                <span class="timeline-id">{{x.paymentDate | date:"dd-MMM-yyyy"}}</span>
                             </div>
                         </ons-col>
                     </ons-row>
                 </ons-list-item>
-                <ons-list-item class="timeline-li" modifier="tappable">
+                <ons-list-item class="timeline-li">
                     <ons-row>
                         <ons-col>
                             <div class="timline-from">
@@ -561,12 +564,12 @@
                         </ons-col>
                         <ons-col>
                             <div class="timline-from">
-                                <span class="timeline-id">$215,528.26</span>
+                                <span class="timeline-id">{{x.beginningBalance}}</span>
                             </div>
                         </ons-col>
                     </ons-row>
                 </ons-list-item>
-                <ons-list-item class="timeline-li" modifier="tappable">
+                <ons-list-item class="timeline-li">
                     <ons-row>
                         <ons-col>
                             <div class="timline-from">
@@ -575,12 +578,12 @@
                         </ons-col>
                         <ons-col>
                             <div class="timline-from">
-                                <span class="timeline-id">$1,679.20</span>
+                                <span class="timeline-id">{{x.newPayment}}</span>
                             </div>
                         </ons-col>
                     </ons-row>
                 </ons-list-item>
-                <ons-list-item class="timeline-li" modifier="tappable">
+                <ons-list-item class="timeline-li">
                     <ons-row>
                         <ons-col>
                             <div class="timline-from">
@@ -589,7 +592,7 @@
                         </ons-col>
                         <ons-col>
                             <div class="timline-from">
-                                <span class="timeline-id">$214,720.15</span>
+                                <span class="timeline-id">{{x.endingBalance}}</span>
                             </div>
                         </ons-col>
                     </ons-row>
