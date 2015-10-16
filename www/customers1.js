@@ -61,7 +61,7 @@ angular.module('myapp', ['onsen'])
                 var memberCode = window.localStorage.getItem("memberCode");
                 if (memberCode != undefined) {
                     //$http.get("http://mobilewebapi.avermax.com.my/api/WebClient/" + memberCode)
-                    $http.get("http://mobilewebapi.avermax.com.my/WebAgent/GetByMonth/" + memberCode + "/" + sharedProperties.getProperty())
+                    $http.get("http://mobilewebapi.avermax.com.my/api//WebAgent/GetByMonth/" + memberCode + "/" + sharedProperties.getProperty())
                     
                     .success(function (response) { $scope.names = response; });       
                 }
