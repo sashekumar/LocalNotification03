@@ -20,9 +20,8 @@ angular.module('myapp', ['onsen'])
                 var memberCode = window.localStorage.getItem("memberCode");
                 //memberCode = '790523085533';
                 if (memberCode != undefined) {
-                    //$http.get("http://mobilewebapi.avermax.com.my/api/WebClient/" + memberCode)
-                    //$http.get("http://mobilewebapi.avermax.com.my/api/WebAgent")
-                    $http.get("http://localhost:47503/api/WebClientStatementList/" + memberCode)
+                    //$http.get("http://localhost:47503/api/WebClientStatementList/" + memberCode)
+                    $http.get("http://mobilewebapi.avermax.com.my/api/WebClientStatementList/" + memberCode)
                     .success(function (response) { $scope.names = response; });       
                     
                      $scope.customNavigate=function(msg){
@@ -46,7 +45,7 @@ angular.module('myapp', ['onsen'])
                 var memberCode = window.localStorage.getItem("memberCode");
                 //memberCode = '790523085533';
                 if (memberCode != undefined) {
-                    $http.get("http://localhost:47503/api/WebClientServiceReport/" + memberCode)
+                    $http.get("http://mobilewebapi.avermax.com.my/api/WebClientServiceReport/" + memberCode)
                     .success(function (response) { $scope.names = response; }); 
                 }
                 else {
@@ -62,7 +61,7 @@ angular.module('myapp', ['onsen'])
                 var memberCode = window.localStorage.getItem("memberCode");
                 if (memberCode != undefined) {
                     //$http.get("http://mobilewebapi.avermax.com.my/api/WebClient/" + memberCode)
-                    $http.get("http://localhost:47503/api/WebAgent/GetByMonth/" + memberCode + "/" + sharedProperties.getProperty())
+                    $http.get("http://mobilewebapi.avermax.com.my/WebAgent/GetByMonth/" + memberCode + "/" + sharedProperties.getProperty())
                     
                     .success(function (response) { $scope.names = response; });       
                 }
@@ -80,18 +79,38 @@ angular.module('myapp', ['onsen'])
                 this.pay = function pay() {
                     //alert("Hello");
                     window.localStorage.setItem("memberCode", this.mcode);
-                    $http.get("http://mobilewebapi.avermax.com.my/api/WebClient/" + this.mcode + "/" + this.password)
+                    ////start http get
+                    //$http.get("http://mobilewebapi.avermax.com.my/api/WebClient/" + this.mcode + "/" + this.password)
                     //$http.get("http://localhost:47503/api/WebClient/" + this.mcode + "/" + this.password)
-                    .success(function (response) {
+                    //.success(function (response) {
                            //alert(response.status) 
-                           menu.setMainPage('customers.html', { closeMenu: true });
-                       }
-                       ).error(function (data, status) {
-                           window.localStorage.removeItem("memberCode");
-                           window.alert("Error");
-                       });
-
+                      //     menu.setMainPage('customers.html', { closeMenu: true });
+                       //}
+                       //).error(function (data, status) {
+                    //       window.localStorage.removeItem("memberCode");
+                    //       window.alert("Error");
+                      // });
+                    ////end
+                    ////start http get
+                    $http({
+                      method: 'GET',
+                      url: 'http://mobilewebapi.avermax.com.my/api/WebClient/' + this.mcode + '/' + this.password
+                    }).then(function successCallback(response) {
+                            //alert(response.status);
+                            //$scope.Content = response;
+                            //alert($scope.Content);
+                            console.log(response);
+                            menu.setMainPage('customers.html', { closeMenu: true });
+                      }, function errorCallback(response) {
+                            window.localStorage.removeItem("memberCode");
+                            window.alert("Error");
+                      });
+                    ////end
                 };
             })
+
+            //function successCallback(param) {
+            //    alert("Hello");
+            //}
 
 ;;
