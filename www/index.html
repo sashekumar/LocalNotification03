@@ -40,11 +40,179 @@
         
         <title>AverMax</title>
         <script>
+            angular.module('myapp', ['onsen'])
+
+            //shared services
+            .service('sharedProperties', function () {
+                    var monthsValue = 0;
+
+                    return {
+                        getProperty: function () {
+                            return monthsValue;
+                        },
+                        setProperty: function(value) {
+                            monthsValue = value;
+                        }
+                    }})
+
+            .service('reminderID', function () {
+                    var reminderId = 0;
+
+                    return {
+                        getProperty: function () {
+                            return reminderId;
+                        },
+                        setProperty: function(value) {
+                            reminderId = value;
+                        }
+                    }})
+
+/////////////////////////////////////////////////////////////////////////////////
+            .controller('CustomerController', function ($scope, $http, sharedProperties) {
+               
+                var memberCode = window.localStorage.getItem("memberCode");
+                //memberCode = '790523085533';
+                if (memberCode != undefined) {
+                    //$http.get("http://localhost:47503/api/WebClientStatementList/" + memberCode)
+                    $http.get("http://mobilewebapi.avermax.com.my/api/WebClientStatementList/" + memberCode)
+                    .success(function (response) { $scope.names = response; });       
+                    
+                     $scope.customNavigate=function(msg){
+                    //$location.path("/view2"+msg)
+                            //alert(msg);
+                            //$scope.Data = Data;
+                            sharedProperties.setProperty(msg);
+                            menu.setMainPage('myreminderdetails.html', { closeMenu: true });
+                    }
+                    
+                }
+                else {
+                    menu.setMainPage('login.html', { closeMenu: true });
+                }
+                 
+            })
+
+/////////////////////////////////////////////////////////////////////////////////
+                .controller('ClientServiceReport', function ($scope, $http) {
+               
+                var memberCode = window.localStorage.getItem("memberCode");
+                //memberCode = '790523085533';
+                if (memberCode != undefined) {
+                    $http.get("http://mobilewebapi.avermax.com.my/api/WebClientServiceReport/" + memberCode)
+                    .success(function (response) { $scope.names = response; }); 
+                }
+                else {
+                    menu.setMainPage('login.html', { closeMenu: true });
+                }
+                 
+            })
+
+/////////////////////////////////////////////////////////////////////////////////
+            .controller('StatementController', function ($scope, $http, sharedProperties) {
+               
+               //alert(sharedProperties.getProperty());
+                var memberCode = window.localStorage.getItem("memberCode");
+                if (memberCode != undefined) {
+                    //$http.get("http://mobilewebapi.avermax.com.my/api/WebClient/" + memberCode)
+                    $http.get("http://mobilewebapi.avermax.com.my/api/WebAgent/GetByMonth/" + memberCode + "/" + sharedProperties.getProperty())
+                    
+                    .success(function (response) { $scope.names = response; });       
+                }
+                else {
+                    menu.setMainPage('login.html', { closeMenu: true });
+                }
+                 
+            })
+
+/////////////////////////////////////////////////////////////////////////////////
+            .controller('ReminderController', function ($scope, $http, reminderID) {
+               
+               //alert(sharedProperties.getProperty());
+                var memberCode = window.localStorage.getItem("memberCode");
+                if (memberCode != undefined) {
+                    $http.get("http://localhost:47503/api/WebClientReminder/" + memberCode)
+                    .success(function (response) { $scope.names = response; });
+                    
+                    $scope.customNavigate=function(msg){
+                    //$location.path("/view2"+msg)
+                            //alert(msg);
+                            //$scope.Data = Data;
+                            reminderID.setProperty(msg);
+                            menu.setMainPage('myreminderdetails.html', { closeMenu: true });
+                    }
+                }
+                else {
+                    menu.setMainPage('login.html', { closeMenu: true });
+                }
+                 
+            })
+
+/////////////////////////////////////////////////////////////////////////////////
+            .controller('ReminderDetailsController', function ($scope, $http, reminderID) {
+               
+               //alert(sharedProperties.getProperty());
+                var memberCode = window.localStorage.getItem("memberCode");
+                if (memberCode != undefined) {
+                    $http.get("http://localhost:47503/api/WebClientReminder/GetById?memberCode=" + memberCode + "&id=" + reminderID.getProperty())
+                    .success(function (response) { $scope.names = response; });
+                }
+                else {
+                    menu.setMainPage('login.html', { closeMenu: true });
+                }
+                 
+            })
+
+/////////////////////////////////////////////////////////////////////////////////
+            .controller('LoginController', function ($scope, $http) {
+                window.localStorage.removeItem("memberCode");
+                this.mcode;
+                this.password;
+                this.pay = function pay() {
+                    //alert("Hello");
+                    window.localStorage.setItem("memberCode", this.mcode);
+                    ////start http get
+                    //$http.get("http://mobilewebapi.avermax.com.my/api/WebClient/" + this.mcode + "/" + this.password)
+                    //$http.get("http://localhost:47503/api/WebClient/" + this.mcode + "/" + this.password)
+                    //.success(function (response) {
+                           //alert(response.status) 
+                      //     menu.setMainPage('customers.html', { closeMenu: true });
+                       //}
+                       //).error(function (data, status) {
+                    //       window.localStorage.removeItem("memberCode");
+                    //       window.alert("Error");
+                      // });
+                    ////end
+                    ////start http get
+                    $http({
+                      method: 'GET',
+                      url: 'http://mobilewebapi.avermax.com.my/api/WebClient/' + this.mcode + '/' + this.password
+                    }).then(function successCallback(response) {
+                            //alert(response.status);
+                            //$scope.Content = response;
+                            //alert($scope.Content);
+                            //console.log(response);
+                            
+                            menu.setMainPage('customers.html', { closeMenu: true });
+                            window.plugin.notification.local.add({ message: 'Payment for October Due!' });
+                      }, function errorCallback(response) {
+                            window.localStorage.removeItem("memberCode");
+                            window.alert("Error");
+                      });
+                    ////end
+                };
+            })
+
+            //function successCallback(param) {
+            //    alert("Hello");
+            //}
+
+;;
           function createReminder(){
-                window.plugin.notification.local.add({ message: 'Payment for October Due!' });
+                  window.plugin.notification.local.add({ message: 'Your payment of RM1689.78 with HLBB is due on October 01, 2015!' });
+                //console.log("Hello World");
           }
 </script>
-        <script src="customers1.js"></script>
+        
         <style>
     .page--menu-page__background {
       background-color: #333;
@@ -182,6 +350,7 @@
   </ons-sliding-menu>
 
   <ons-template id="menu.html">
+      
     <ons-page modifier="menu-page">
       <ons-toolbar modifier="transparent"></ons-toolbar>
 
@@ -190,14 +359,14 @@
           <ons-icon icon="fa-bookmark" fixed-width="true"></ons-icon>
           My Service Report
         </ons-list-item>
-          <ons-list-item class="menu-item" ng-click="menu.setMainPage('mystatement.html', {closeMenu: true})">
+        <ons-list-item class="menu-item" ng-click="menu.setMainPage('mystatement.html', {closeMenu: true})">
           <ons-icon icon="fa-bookmark" fixed-width="true"></ons-icon>
           My Service Plan
         </ons-list-item>
-          <!--<ons-list-item class="menu-item" ng-click="menu.setMainPage('myreminders.html', {closeMenu: true})">
+        <ons-list-item class="menu-item" ng-click="menu.setMainPage('myreminders.html', {closeMenu: true})">
           <ons-icon icon="fa-bookmark" fixed-width="true"></ons-icon>
           My Reminders
-        </ons-list-item>-->
+        </ons-list-item>
       </ons-list>
 
       <br>
@@ -526,7 +695,7 @@
     </ons-page>
   </ons-template>
     
-    <ons-template id="myreminders.html">
+    <ons-template id="mystatementdetails.html">
     <ons-page>
       <ons-toolbar>
         <div class="left">
@@ -625,9 +794,216 @@
     </ons-page>
   </ons-template>
     
+    <ons-template id="myreminders.html">
+        <ons-page>
+            <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button ng-click="menu.toggle()">
+            <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">My Reminders</div>
+      </ons-toolbar>
+    
+    <ons-row style="margin-top: 5px; text-align: center;">
+            <ons-col>
+                <br /><img src="logo-small.png" />
+            </ons-col>
+        </ons-row>
+            
+    <ons-row style="margin-top: 5px; text-align: center;">
+        <ons-col>
+            <ons-list class="timeline" modifier="inset" ng-app="app" ng-controller="ReminderController">
+                <ons-list-item class="timeline-li" modifier="tappable" ng-repeat="x in names">
+                    <ons-row ng-click="customNavigate(x.id);">
+                        <ons-col>
+                            <div class="timline-from">
+                                <span class="timeline-name"> {{x.reminderText}}</span>
+                            </div>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+            </ons-list>
+        </ons-col>
+      </ons-row>
+            
+        </ons-page>
+    </ons-template>
+    
+      
+    <ons-template id="myreminderdetails.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button ng-click="menu.toggle()">
+            <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">My Reminder Details</div>
+      </ons-toolbar>
+
+        <ons-row style="margin-top: 5px; text-align: center;">
+            <ons-col>
+                <br /><img src="logo-small.png" />
+            </ons-col>
+        </ons-row>
+        
+        <ons-row style="margin-top: 5px; text-align: left;" ng-app="app" ng-controller="ReminderDetailsController">
+        <ons-col ng-repeat="x in names">
+            <ons-list class="timeline" modifier="inset">
+                <ons-list-item class="timeline-li">
+                    <ons-row>
+                        <ons-col>
+                            <div class="timline-from">
+                                <span class="timeline-name">
+                                    Dear {{x.name}} <br /><br/>
+                                    This is the reminder for your mortgage;
+                                </span>
+                            </div>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+                <ons-list-item class="timeline-li">
+                    <ons-row>
+                        <ons-col>
+                            <div class="timline-from">
+                                <span class="timeline-name">Code</span>
+                            </div>
+                        </ons-col>
+                        <ons-col>
+                            <div class="timline-from">
+                                <span class="timeline-id">{{x.memberCode}}</span>
+                            </div>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+                <ons-list-item class="timeline-li">
+                    <ons-row>
+                        <ons-col>
+                            <div class="timline-from">
+                                <span class="timeline-name">Bank</span>
+                            </div>
+                        </ons-col>
+                        <ons-col>
+                            <div class="timline-from">
+                                <span class="timeline-id">{{x.finInst}}</span>
+                            </div>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+                <ons-list-item class="timeline-li">
+                    <ons-row>
+                        <ons-col>
+                            <div class="timline-from">
+                                <span class="timeline-name">Loan A/C No.</span>
+                            </div>
+                        </ons-col>
+                        <ons-col>
+                            <div class="timline-from">
+                                <span class="timeline-id">{{x.loanAccNo}}</span>
+                            </div>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+                <ons-list-item class="timeline-li">
+                    <ons-row>
+                        <ons-col>
+                            <div class="timline-from">
+                                <span class="timeline-name">Month</span>
+                            </div>
+                        </ons-col>
+                        <ons-col>
+                            <div class="timline-from">
+                                <span class="timeline-id">{{x.month}}</span>
+                            </div>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+                <ons-list-item class="timeline-li">
+                    <ons-row>
+                        <ons-col>
+                            <div class="timline-from">
+                                <span class="timeline-name">Payment Date</span>
+                            </div>
+                        </ons-col>
+                        <ons-col>
+                            <div class="timline-from">
+                                <span class="timeline-id">{{x.paymentDate | date:"dd-MMM-yyyy"}}</span>
+                            </div>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+                <ons-list-item class="timeline-li">
+                    <ons-row>
+                        <ons-col>
+                            <div class="timline-from">
+                                <span class="timeline-name">Beginning Balance</span>
+                            </div>
+                        </ons-col>
+                        <ons-col>
+                            <div class="timline-from">
+                                <span class="timeline-id">{{x.beginningBalance}}</span>
+                            </div>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+                <ons-list-item class="timeline-li">
+                    <ons-row>
+                        <ons-col>
+                            <div class="timline-from">
+                                <span class="timeline-name">New Payment</span>
+                            </div>
+                        </ons-col>
+                        <ons-col>
+                            <div class="timline-from">
+                                <span class="timeline-id">{{x.newPayment}}</span>
+                            </div>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+                <ons-list-item class="timeline-li">
+                    <ons-row>
+                        <ons-col>
+                            <div class="timline-from">
+                                <span class="timeline-name">Ending Balance</span>
+                            </div>
+                        </ons-col>
+                        <ons-col>
+                            <div class="timline-from">
+                                <span class="timeline-id">{{x.endingBalance}}</span>
+                            </div>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+                <ons-list-item class="timeline-li">
+                    <ons-row>
+                        <ons-col>
+                            <div class="timline-from">
+                                <span class="timeline-name">
+                                    Kindly make payment on time to avoid any additional charges or penalty.<br/><br/>
+                                    Thank you.<br/><br/>
+                                    <ons-button modifier="large" class="login-button" ng-click="customNavigate(x.id);">I have already made this payment!</ons-button><br/>
+                                    Best Regards,<br/>
+                                    AverMax Administrator
+                                </span>
+                            </div>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+            </ons-list>
+            </ons-col>
+        </ons-row>
+        <ons-row style="margin-top: 5px; text-align: center;width:98%;display: inline-block;">
+        <ons-button ng-click="menu.setMainPage('myreminders.html', {closeMenu: true})" modifier="large--quiet">Back to My Reminders</ons-button>
+        </ons-row>
+    </ons-page>
+  </ons-template>
+    
+    
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
-            <script type="text/javascript" src="local-notification.js"></script>
+        <script type="text/javascript" src="local-notification.js"></script>
+        <!--<script src="customers1.js"></script>-->
         <script type="text/javascript">
             app.initialize();
         </script>

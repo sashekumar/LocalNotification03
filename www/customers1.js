@@ -14,6 +14,18 @@ angular.module('myapp', ['onsen'])
                         }
                     }})
 
+            .service('reminderID', function () {
+                    var reminderId = 0;
+
+                    return {
+                        getProperty: function () {
+                            return reminderId;
+                        },
+                        setProperty: function(value) {
+                            reminderId = value;
+                        }
+                    }})
+
 /////////////////////////////////////////////////////////////////////////////////
             .controller('CustomerController', function ($scope, $http, sharedProperties) {
                
@@ -29,7 +41,7 @@ angular.module('myapp', ['onsen'])
                             //alert(msg);
                             //$scope.Data = Data;
                             sharedProperties.setProperty(msg);
-                            menu.setMainPage('myreminders.html', { closeMenu: true });
+                            menu.setMainPage('myreminderdetails.html', { closeMenu: true });
                     }
                     
                 }
@@ -61,9 +73,47 @@ angular.module('myapp', ['onsen'])
                 var memberCode = window.localStorage.getItem("memberCode");
                 if (memberCode != undefined) {
                     //$http.get("http://mobilewebapi.avermax.com.my/api/WebClient/" + memberCode)
-                    $http.get("http://mobilewebapi.avermax.com.my/api//WebAgent/GetByMonth/" + memberCode + "/" + sharedProperties.getProperty())
+                    $http.get("http://mobilewebapi.avermax.com.my/api/WebAgent/GetByMonth/" + memberCode + "/" + sharedProperties.getProperty())
                     
                     .success(function (response) { $scope.names = response; });       
+                }
+                else {
+                    menu.setMainPage('login.html', { closeMenu: true });
+                }
+                 
+            })
+
+/////////////////////////////////////////////////////////////////////////////////
+            .controller('ReminderController', function ($scope, $http, reminderID) {
+               
+               //alert(sharedProperties.getProperty());
+                var memberCode = window.localStorage.getItem("memberCode");
+                if (memberCode != undefined) {
+                    $http.get("http://localhost:47503/api/WebClientReminder/" + memberCode)
+                    .success(function (response) { $scope.names = response; });
+                    
+                    $scope.customNavigate=function(msg){
+                    //$location.path("/view2"+msg)
+                            //alert(msg);
+                            //$scope.Data = Data;
+                            reminderID.setProperty(msg);
+                            menu.setMainPage('myreminderdetails.html', { closeMenu: true });
+                    }
+                }
+                else {
+                    menu.setMainPage('login.html', { closeMenu: true });
+                }
+                 
+            })
+
+/////////////////////////////////////////////////////////////////////////////////
+            .controller('ReminderDetailsController', function ($scope, $http, reminderID) {
+               
+               //alert(sharedProperties.getProperty());
+                var memberCode = window.localStorage.getItem("memberCode");
+                if (memberCode != undefined) {
+                    $http.get("http://localhost:47503/api/WebClientReminder/GetById?memberCode=" + memberCode + "&id=" + reminderID.getProperty())
+                    .success(function (response) { $scope.names = response; });
                 }
                 else {
                     menu.setMainPage('login.html', { closeMenu: true });
@@ -99,8 +149,10 @@ angular.module('myapp', ['onsen'])
                             //alert(response.status);
                             //$scope.Content = response;
                             //alert($scope.Content);
-                            console.log(response);
+                            //console.log(response);
+                            
                             menu.setMainPage('customers.html', { closeMenu: true });
+                            window.plugin.notification.local.add({ message: 'Payment for October Due!' });
                       }, function errorCallback(response) {
                             window.localStorage.removeItem("memberCode");
                             window.alert("Error");
