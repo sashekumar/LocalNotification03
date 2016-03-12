@@ -89,7 +89,7 @@ angular.module('myapp', ['onsen'])
                //alert(sharedProperties.getProperty());
                 var memberCode = window.localStorage.getItem("memberCode");
                 if (memberCode != undefined) {
-                    $http.get("http://localhost:47503/api/WebClientReminder/" + memberCode)
+                    $http.get("http://mobilewebapi.avermax.com.my/api/WebClientReminder/" + memberCode)
                     .success(function (response) { $scope.names = response; });
                     
                     $scope.customNavigate=function(msg){
