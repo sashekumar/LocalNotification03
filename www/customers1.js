@@ -31,7 +31,7 @@ angular.module('myapp', ['onsen'])
                
                 var memberCode = window.localStorage.getItem("memberCode");
                 //memberCode = '790523085533';
-                if (memberCode != undefined) {
+                if (memberCode !== undefined) {
                     //$http.get("http://localhost:47503/api/WebClientStatementList/" + memberCode)
                     $http.get("http://mobilewebapi.avermax.com.my/api/WebClientStatementList/" + memberCode)
                     .success(function (response) { $scope.names = response; });       
@@ -41,7 +41,7 @@ angular.module('myapp', ['onsen'])
                             //alert(msg);
                             //$scope.Data = Data;
                             sharedProperties.setProperty(msg);
-                            menu.setMainPage('myreminderdetails.html', { closeMenu: true });
+                            menu.setMainPage('mystatementdetails.html', { closeMenu: true });
                     }
                     
                 }
@@ -152,7 +152,15 @@ angular.module('myapp', ['onsen'])
                             //console.log(response);
                             
                             menu.setMainPage('customers.html', { closeMenu: true });
+                        
+                            ////////////////////////////////////////////////////////////////////////
+                            //18-October-2015
+                            //read list of reminders from database and create as local notifications
+                        
                             window.plugin.notification.local.add({ message: 'Payment for October Due!' });
+                        
+                            //end read
+                            ////////////////////////////////////////////////////////////////////////
                       }, function errorCallback(response) {
                             window.localStorage.removeItem("memberCode");
                             window.alert("Error");
