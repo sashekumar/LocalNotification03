@@ -165,7 +165,12 @@
   line-height: 1.15;
 }
             
-
+.error {
+            color:red;
+            font-size: 13px;
+            font-weight: bold;
+            text-align: left;
+    }
   </style>
     </head>
     <body>
@@ -224,13 +229,18 @@
 
       <ons-row style="margin-top: 20px; text-align: center;">
         <ons-col>
-            <div class="login-form" ng-app="app" ng-controller="LoginController as login">
+            <div class="login-form" ng-app="app" ng-controller="LoginController as login" ng-form name="loginForm">
                 <img src="logo.png" />
-                <input type="text" class="text-input--underbar" ng-model="login.mcode" placeholder="Member Code" value="">
-                <input type="password" class="text-input--underbar" ng-model="login.password" placeholder="Password" value="">
+                <input type="text" name="memberCode" required class="text-input--underbar" ng-model="login.mcode" placeholder="Member Code" value="">
+                <span class="error" ng-show="loginForm.memberCode.$error.required"><i class="ion-information-circled"></i> 
+      Member Code is required!</span>
+                <input type="password" name="password" required class="text-input--underbar" ng-model="login.password" placeholder="Password" value="">
+                <span class="error" ng-show="loginForm.password.$error.required"><i class="ion-information-circled"></i> 
+      Password is required!</span>
                 <br><br>
-                <ons-button modifier="large" class="login-button" onclick="createReminder();" ng-click="login.pay()">Log In</ons-button>
+                <ons-button modifier="large" class="login-button" onclick="createReminder();" ng-click="loginForm.$valid && login.pay()">Log In</ons-button>
                 <br><br>
+            </div>
 </ons-col>
       </ons-row>
     </ons-page>
